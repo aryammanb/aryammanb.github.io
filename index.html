@@ -13,7 +13,7 @@
     ul { padding-left: 22px; margin: 0; }
     li { margin: 0 0 6px; }
     li:last-child { margin-bottom: 0; }
-    main > section:last-child p { margin-bottom: 0; }
+    main > p:last-child, main > section:last-child p { margin-bottom: 0; }
     a { color: #1549a1; text-underline-offset: 3px; }
     a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
     .social-links { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 5px; position: relative; }
@@ -48,93 +48,52 @@
       li { margin-bottom: 3px; }
     }
   </style>
+  <script src="/assets/purify.min.js" defer></script>
+  <script src="/assets/portfolio-shared.js?v=1" defer></script>
+  <script src="/assets/portfolio-content.js?v=1" defer></script>
 </head>
 <body>
   <main>
-    <header>
-      <h1>Aryamman Bhatia</h1>
-      <p>Student of semiconductors; conspiring to build indigenous, frontier fab capability.</p>
+    <h1>Aryamman Bhatia</h1>
+<p>Student of semiconductors; conspiring to build indigenous, frontier fab capability.</p>
       <p>Currently Exploring - <a href="https://processzero.github.io/"><strong>AI-native chip fabs</strong></a></p>
       <p>Founded <a href="https://youtu.be/UWHMm4Qjpmo?si=KiwOOxzL8OLNGPFb"><strong>HackerFab @ IITB</strong></a>, built DIY semiconductor fabrication equipment to make the industry more accessible to students. Fabricated my own devices.</p>
       <p>My work in the media — <a href="https://youtu.be/UWHMm4Qjpmo?si=KiwOOxzL8OLNGPFb">RuntimeBRT</a>, <a href="https://swarajyamag.com/technology/inside-hackerfab-iitb-indias-first-student-led-chip-fab">Swarajya Magazine</a></p>
-    </header>
+    
 
-    <section aria-labelledby="engineering">
-      <h2 id="engineering">Engineering</h2>
+    
+      <h2>Engineering</h2>
       <ul>
         <li><a href="/litho/">Maskless Lithography</a> — clean and repeatable 3 µm features achieved</li>
         <li><a href="/sputter/">DC Magnetron Sputter</a> — plasma-based nanometer-scale metal deposition</li>
         <li><a href="/fabricated/">Fabricated semiconductor devices</a> — engineered a process on entirely self made equipment</li>
       </ul>
-    </section>
+    
 
-    <section aria-labelledby="community">
-      <h2 id="community">Community</h2>
+    
+      <h2>Community</h2>
       <ul>
         <li>Running <a href="https://junction.lagrangepoint.org">Junction</a> — a residency to seed semiconductor talent in India</li>
         <li>Taught a <a href="https://youtube.com/playlist?list=PL8vKQfFtdyAJ3X6LCVu2bD0E-TdJ8vKZG&amp;si=2NzPwnh5XY1NngX3">course on semiconductor device physics</a></li>
       </ul>
-    </section>
+    
 
-    <section aria-labelledby="writing">
-      <h2 id="writing">Writing</h2>
+    
+      <h2>Writing</h2>
       <ul>
         <li><a href="https://aryamman.substack.com/p/the-silicon-chakravyuha-part-i">The Silicon Chakravyuha — Part 1</a></li>
       </ul>
-    </section>
+    
 
-    <section aria-labelledby="awards">
-      <h2 id="awards">Awards</h2>
+    
+      <h2>Awards</h2>
       <ul>
         <li><a href="https://marginalrevolution.com/marginalrevolution/2026/07/emergent-ventures-india-17th-cohort.html">Emergent Ventures Fellow</a> — received in August 2025, to support my work at HackerFab IITB</li>
         <li>Winner — User Design Track — VLSID 2026</li>
       </ul>
-    </section>
-    <section aria-labelledby="socials">
-      <h2 id="socials">Socials</h2>
-      <div class="social-links">
-        <a href="https://x.com/aryamman_bhatia">X</a><span aria-hidden="true">·</span>
-        <a href="https://www.linkedin.com/in/aryamman-bhatia-2818b1280/">LinkedIn</a><span aria-hidden="true">·</span>
-        <a href="https://aryamman.substack.com/">Substack</a><span aria-hidden="true">·</span>
-        <details class="email-contact">
-          <summary>email</summary>
-          <div class="email-panel">
-            <a id="email-address" href="mailto:aryammanbhatia@gmail.com">aryammanbhatia@gmail.com</a>
-            <div class="email-actions">
-              <button id="copy-email" type="button">Copy address</button>
-              <a href="mailto:aryammanbhatia@gmail.com">Email app</a>
-              <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=aryammanbhatia%40gmail.com" target="_blank" rel="noopener noreferrer">Gmail</a>
-            </div>
-            <p class="email-status" id="email-status" role="status"></p>
-          </div>
-        </details>
-      </div>
-    </section>
+    
+    <h2>Socials</h2><p><a href="https://x.com/aryamman_bhatia">X</a> · <a href="https://www.linkedin.com/in/aryamman-bhatia-2818b1280/">LinkedIn</a> · <a href="https://aryamman.substack.com/">Substack</a> · <a href="mailto:aryammanbhatia@gmail.com">email</a></p>
   </main>
-  <script>
-    document.getElementById('copy-email').addEventListener('click', async () => {
-      const status = document.getElementById('email-status');
-      try {
-        await navigator.clipboard.writeText('aryammanbhatia@gmail.com');
-        status.textContent = 'Email address copied.';
-      } catch {
-        const range = document.createRange();
-        range.selectNodeContents(document.getElementById('email-address'));
-        const selection = window.getSelection();
-        selection.removeAllRanges();
-        selection.addRange(range);
-        status.textContent = 'Address selected. Press Ctrl+C or ⌘C to copy.';
-      }
-    });
-    document.addEventListener('keydown', event => {
-      if (event.key === 'Escape') {
-        const contact = document.querySelector('.email-contact');
-        if (contact.open) {
-          contact.open = false;
-          contact.querySelector('summary').focus();
-        }
-      }
-    });
-  </script>
+
 </body>
 </html>
