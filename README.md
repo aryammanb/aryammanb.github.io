@@ -40,7 +40,7 @@ The portfolio has its own backend project and database, separate from Process
 Zero. Secrets `PORTFOLIO_PIN_HASH` and
 `PORTFOLIO_PIN_SALT` exist only in the backend environment. Never commit a PIN,
 session token, or GitHub publishing credential. Sessions expire in 30 minutes;
-five attempts per hour and twenty per day are enforced globally, plus per-IP
+five failed attempts per hour and twenty per day are enforced globally, plus per-IP
 limits. Four digits have limited strength even with these controls.
 
 The backend validates/sanitizes content, keeps twenty revisions, and rejects

@@ -3,7 +3,7 @@
 #unlock-panel{max-width:380px;margin:60px auto}
 #unlock-panel h1{margin-bottom:12px}
 .unlock-controls{display:flex;gap:8px;margin-top:8px}
-input,button{font:inherit}
+input,button{font:inherit;box-sizing:border-box}
 #pin{width:110px;padding:8px;border:1px solid #aaa;letter-spacing:5px}
 button{padding:7px 11px;cursor:pointer;border:1px solid #aaa;border-radius:2px;background:#fff;color:#222}
 button:disabled{opacity:.6;cursor:wait}
