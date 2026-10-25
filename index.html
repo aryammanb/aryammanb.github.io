@@ -16,6 +16,15 @@
     main > section:last-child p { margin-bottom: 0; }
     a { color: #1549a1; text-underline-offset: 3px; }
     a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+    .social-links { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 5px; position: relative; }
+    .email-contact summary { color: #1549a1; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; list-style: none; }
+    .email-contact summary::-webkit-details-marker { display: none; }
+    .email-contact summary:focus-visible, .email-panel button:focus-visible { outline: 2px solid #1549a1; outline-offset: 4px; }
+    .email-panel { position: absolute; z-index: 1; bottom: 100%; left: 0; width: 278px; max-width: calc(100vw - 36px); padding: 12px; margin-bottom: 8px; border: 1px solid #ccc; background: #fff; font-size: 13px; box-shadow: 0 2px 8px #0001; }
+    .email-actions { display: flex; align-items: center; gap: 12px; margin-top: 10px; font-size: 12px; }
+    .email-panel button { font: inherit; padding: 4px 7px; background: #fff; border: 1px solid #aaa; border-radius: 2px; cursor: pointer; }
+    .email-status { margin: 8px 0 0; font-size: 11px; color: #555; }
+    .email-status:empty { display: none; }
     @media (max-width: 480px) {
       body { margin: 16px auto; padding: 0 18px; font-size: 14px; line-height: 1.35; }
       h1 { font-size: 24px; margin-bottom: 8px; }
@@ -83,8 +92,49 @@
     </section>
     <section aria-labelledby="socials">
       <h2 id="socials">Socials</h2>
-      <p><a href="https://x.com/aryamman_bhatia">X</a> · <a href="https://www.linkedin.com/in/aryamman-bhatia-2818b1280/">LinkedIn</a> · <a href="https://aryamman.substack.com/">Substack</a> · <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=aryammanbhatia%40gmail.com" target="_blank" rel="noopener noreferrer" aria-label="email (opens Gmail in a new tab)">email</a></p>
+      <div class="social-links">
+        <a href="https://x.com/aryamman_bhatia">X</a><span aria-hidden="true">·</span>
+        <a href="https://www.linkedin.com/in/aryamman-bhatia-2818b1280/">LinkedIn</a><span aria-hidden="true">·</span>
+        <a href="https://aryamman.substack.com/">Substack</a><span aria-hidden="true">·</span>
+        <details class="email-contact">
+          <summary>email</summary>
+          <div class="email-panel">
+            <a id="email-address" href="mailto:aryammanbhatia@gmail.com">aryammanbhatia@gmail.com</a>
+            <div class="email-actions">
+              <button id="copy-email" type="button">Copy address</button>
+              <a href="mailto:aryammanbhatia@gmail.com">Email app</a>
+              <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=aryammanbhatia%40gmail.com" target="_blank" rel="noopener noreferrer">Gmail</a>
+            </div>
+            <p class="email-status" id="email-status" role="status"></p>
+          </div>
+        </details>
+      </div>
     </section>
   </main>
+  <script>
+    document.getElementById('copy-email').addEventListener('click', async () => {
+      const status = document.getElementById('email-status');
+      try {
+        await navigator.clipboard.writeText('aryammanbhatia@gmail.com');
+        status.textContent = 'Email address copied.';
+      } catch {
+        const range = document.createRange();
+        range.selectNodeContents(document.getElementById('email-address'));
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        status.textContent = 'Address selected. Press Ctrl+C or ⌘C to copy.';
+      }
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        const contact = document.querySelector('.email-contact');
+        if (contact.open) {
+          contact.open = false;
+          contact.querySelector('summary').focus();
+        }
+      }
+    });
+  </script>
 </body>
 </html>
