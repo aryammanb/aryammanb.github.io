@@ -4,4 +4,5 @@ p { margin: 0 0 14px; }
 a { color: #1549a1; text-underline-offset: 3px; }
 a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
 .pending { color: #666; font-size: 14px; }
+main img { display: block; max-width: 100%; height: auto; margin: 12px 0; }
 @media (max-width: 480px) { body { margin: 16px auto; padding: 0 18px; font-size: 14px; } h1 { font-size: 24px; } }

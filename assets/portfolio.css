@@ -9,6 +9,7 @@ li:last-child { margin-bottom: 0; }
 main > section:last-child p { margin-bottom: 0; }
 a { color: #1549a1; text-underline-offset: 3px; }
 a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+main img { display: block; max-width: 100%; height: auto; margin: 12px 0; }
 .social-links { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 5px; position: relative; }
 .email-contact summary { color: #1549a1; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; list-style: none; }
 .email-contact summary::-webkit-details-marker { display: none; }

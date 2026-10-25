@@ -1,10 +1,17 @@
 (() => {
   'use strict';
   const API='https://aryamman-portfolio-content-api.aryammanbhatia.chatgpt.site/api';
-  const clean=html=>DOMPurify.sanitize(html,{
-    ALLOWED_TAGS:['p','br','strong','b','em','i','u','s','ol','ul','li','a','blockquote','code','h2','h3','sub','sup'],
-    ALLOWED_ATTR:['href','title'],ALLOW_DATA_ATTR:false,
-  }).replace(/&nbsp;|&#160;|\u00a0/g,' ');
+  const IMAGE_BASE=API+'/portfolio-image?id=';
+  const isImageUrl=value=>typeof value==='string'&&value.startsWith(IMAGE_BASE)&&/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}\.(png|jpg|webp|gif)$/.test(value.slice(IMAGE_BASE.length));
+  const clean=html=>{
+    const template=document.createElement('template');
+    template.innerHTML=DOMPurify.sanitize(html,{
+      ALLOWED_TAGS:['p','br','strong','b','em','i','u','s','ol','ul','li','a','blockquote','code','h2','h3','sub','sup','img'],
+      ALLOWED_ATTR:['href','title','src','alt'],ALLOW_DATA_ATTR:false,
+    });
+    template.content.querySelectorAll('img').forEach(image=>{if(!isImageUrl(image.getAttribute('src')))image.remove();});
+    return template.innerHTML.replace(/&nbsp;|&#160;|\u00a0/g,' ');
+  };
   function enhanceEmails(root) {
     root.querySelectorAll('a[href^="mailto:"]').forEach(link=>{
       if(link.closest('.email-contact'))return;
@@ -37,8 +44,9 @@
     title.textContent=page?page.title:'Page not found';
     const template=document.createElement('template');template.innerHTML=page?clean(page.html):'<p>This page is not available.</p>';
     main.replaceChildren(title,template.content);
+    main.querySelectorAll('img').forEach(image=>{image.loading='lazy';image.decoding='async';});
     if(slug){const back=document.createElement('p');const link=document.createElement('a');link.href='/';link.textContent='← '+doc.title;back.append(link);main.prepend(back);}
     document.title=slug?title.textContent+' — '+doc.title:doc.title;enhanceEmails(main);
   }
-  window.PortfolioContent=Object.freeze({API,clean,render,enhanceEmails});
+  window.PortfolioContent=Object.freeze({API,clean,render,enhanceEmails,isImageUrl});
 })();

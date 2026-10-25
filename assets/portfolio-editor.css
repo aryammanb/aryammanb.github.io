@@ -15,6 +15,11 @@ button:focus-visible,input:focus-visible,[contenteditable]:focus-visible{outline
 .page-controls select{font:inherit;padding:6px;max-width:250px;border:1px solid #aaa;background:white}
 #add-page-form{border:1px solid #ddd;padding:12px;margin-bottom:20px;font-size:12px}
 #add-page-form input{display:block;width:100%;padding:8px;margin:7px 0 10px}
+#image-form{border:1px solid #ddd;padding:12px;margin-bottom:20px;font-size:12px}
+#image-form input{display:block;width:100%;padding:8px;margin:7px 0 12px;border:1px solid #aaa}
+#image-status{margin:8px 0 0;line-height:1.4}
+#image-status:empty{display:none}
+.ql-editor img{display:block;max-width:100%;height:auto;margin:12px 0}
 #save-status{flex:1;min-width:130px;line-height:1.4;color:#555}
 .editor-sites-compact{font-size:11px;margin:10px 0 16px}
 #site-title[contenteditable]{cursor:text}
