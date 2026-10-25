@@ -1,6 +1,6 @@
 (() => {
   'use strict';
-  const API='https://processzero-content-api.aryammanbhatia.chatgpt.site/api';
+  const API='https://aryamman-portfolio-content-api.aryammanbhatia.chatgpt.site/api';
   const clean=html=>DOMPurify.sanitize(html,{
     ALLOWED_TAGS:['p','br','strong','b','em','i','u','s','ol','ul','li','a','blockquote','code','h2','h3','sub','sup'],
     ALLOWED_ATTR:['href','title'],ALLOW_DATA_ATTR:false,
@@ -31,9 +31,14 @@
   }
   function render(doc) {
     if(!doc||typeof doc.title!=='string'||typeof doc.html!=='string')return;
-    const main=document.querySelector('main');const title=document.createElement('h1');title.textContent=doc.title;
-    const template=document.createElement('template');template.innerHTML=clean(doc.html);
-    main.replaceChildren(title,template.content);document.title=doc.title;enhanceEmails(main);
+    const slug=new URLSearchParams(location.search).get('page')||location.pathname.replace(/^\/+|\/+$/g,'');
+    const page=slug?(doc.pages||[]).find(page=>page.slug===slug):doc;
+    const main=document.querySelector('main');const title=document.createElement('h1');
+    title.textContent=page?page.title:'Page not found';
+    const template=document.createElement('template');template.innerHTML=page?clean(page.html):'<p>This page is not available.</p>';
+    main.replaceChildren(title,template.content);
+    if(slug){const back=document.createElement('p');const link=document.createElement('a');link.href='/';link.textContent='← '+doc.title;back.append(link);main.prepend(back);}
+    document.title=slug?title.textContent+' — '+doc.title:doc.title;enhanceEmails(main);
   }
   window.PortfolioContent=Object.freeze({API,clean,render,enhanceEmails});
 })();
