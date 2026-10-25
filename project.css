@@ -1,0 +1,7 @@
+body { max-width: 680px; margin: 28px auto; padding: 0 24px; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.4; color: #222; background: #fff; }
+h1 { font-size: 26px; line-height: 1.2; margin: 24px 0 14px; }
+p { margin: 0 0 14px; }
+a { color: #1549a1; text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.pending { color: #666; font-size: 14px; }
+@media (max-width: 480px) { body { margin: 16px auto; padding: 0 18px; font-size: 14px; } h1 { font-size: 24px; } }
