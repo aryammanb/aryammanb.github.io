@@ -7,8 +7,8 @@ Unlock with the private PIN, click the text, and choose **Save changes**.
 Selecting text opens the formatting/link toolbar. Ctrl/Cmd+S also saves.
 The PIN gates publishing; the homepage content remains public.
 
-Use **Add image** (or paste/drop a local image) to upload a PNG, JPEG, WebP or
-GIF up to 5 MB. Optionally describe the image, choose **Insert image**, then
+Use **Add image** (or paste/drop a local image) to upload a PNG, JPEG, WebP, GIF or
+AVIF up to 5 MB. Optionally describe the image, choose **Insert image**, then
 **Save changes**. Images stay with their page when switching between pages.
 Delete an image in the text editor to remove it from the page. Uploaded files
 remain stored for revision recovery; do not delete the storage bucket when
@@ -46,7 +46,8 @@ limits. Four digits have limited strength even with these controls.
 The backend validates/sanitizes content, keeps twenty revisions, and rejects
 saves from stale tabs. The public site sanitizes content again before display.
 Image files live in the portfolio backend's separate R2 bucket (`BUCKET`).
-Uploads require an active session and are rate-limited. File size, MIME type and
-magic bytes are checked; SVG/HTML and external image sources are not accepted.
+Uploads require an active session and are rate-limited. File size and format
+signatures are checked; the detected format overrides incorrect browser MIME
+labels or filename extensions. SVG/HTML and external image sources are not accepted.
 Public images are served at `/api/portfolio-image?id=…` with fixed image MIME
 types and `nosniff` headers. Content contains these URLs, never embedded base64.

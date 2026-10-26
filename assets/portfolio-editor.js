@@ -32,7 +32,7 @@
       editor=new Quill('#body-editor',{theme:'bubble',formats:['bold','italic','underline','strike','link','list','indent','blockquote','code','header','script','image'],modules:{
         toolbar:{container:[[{header:[2,3,false]}],['bold','italic','underline','link','image'],[{list:'bullet'},{list:'ordered'}],['clean']],handlers:{image:openImageForm}},
         clipboard:{matchers:[['IMG',(node,delta)=>isImageUrl(node.getAttribute('src'))?delta:new Delta()]]},
-        uploader:{mimetypes:['image/png','image/jpeg','image/webp','image/gif'],handler(range,files){
+        uploader:{mimetypes:['image/png','image/jpeg','image/webp','image/gif','image/avif'],handler(range,files){
           if(uploading||saving)return;openImageForm();imagePosition=range.index;
           const transfer=new DataTransfer();transfer.items.add(files[0]);byId('image-file').files=transfer.files;
           byId('image-status').textContent=files.length>1?'Insert one image at a time. The first image is selected.':'Image selected. Add a description if you like, then insert it.';
@@ -88,6 +88,7 @@
       const [image]=editor.getLeaf(index);if(image?.domNode?.tagName==='IMG')image.domNode.setAttribute('alt',alt);
       editor.update('user');editor.insertText(index+1,'\n','user');editor.setSelection(index+2,0,'silent');
       byId('image-form').hidden=true;byId('image-file').value='';byId('image-alt').value='';markDirty();status('Image added. Save changes to publish it.');
+      requestAnimationFrame(()=>image?.domNode?.scrollIntoView({block:'nearest'}));
     }catch(error){byId('image-status').textContent=error.name==='TimeoutError'?'Upload timed out. Please try again.':error.message;if(error.status===401)lock('Your session expired. Unlock again to upload.');}
     finally{uploading=false;editor.enable(true);controls.forEach(id=>{byId(id).disabled=false;});}
   });

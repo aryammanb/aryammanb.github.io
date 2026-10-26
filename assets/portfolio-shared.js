@@ -2,7 +2,7 @@
   'use strict';
   const API='https://aryamman-portfolio-content-api.aryammanbhatia.chatgpt.site/api';
   const IMAGE_BASE=API+'/portfolio-image?id=';
-  const isImageUrl=value=>typeof value==='string'&&value.startsWith(IMAGE_BASE)&&/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}\.(png|jpg|webp|gif)$/.test(value.slice(IMAGE_BASE.length));
+  const isImageUrl=value=>typeof value==='string'&&value.startsWith(IMAGE_BASE)&&/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}\.(png|jpg|webp|gif|avif)$/.test(value.slice(IMAGE_BASE.length));
   const clean=html=>{
     const template=document.createElement('template');
     template.innerHTML=DOMPurify.sanitize(html,{
